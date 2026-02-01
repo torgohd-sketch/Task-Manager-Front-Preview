@@ -1,6 +1,8 @@
 Task List (Frontend)
 
 Frontend project built with HTML, CSS, and vanilla JavaScript, connected to a Java Spring Boot REST API.
+api for the proyect: https://github.com/Angel0zzx/task-manager-api-java 
+an api where i participate
 
 It allows users to create, list, search, select, update, and delete tasks through a simple web interface.
 
