@@ -291,3 +291,7 @@ document.getElementById("clear-date-filter-btn").addEventListener('click', () =>
     optionsSpan_date.innerText = "";
     document.getElementById('keyword-date').value = '';
 });
+
+document.getElementById('Usar').addEventListener('click', () => {
+    window.open('https://github.com/Angel0zzx/task-manager-api-java', '_blank');
+});
