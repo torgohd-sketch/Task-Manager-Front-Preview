@@ -24,23 +24,37 @@ async function init() {
     }
 }
 
+
 document.getElementById('load-tasks-btn').addEventListener('click', () => {
     const tabla = document.getElementById('task-table-container');
-    if (tabla.style.display === 'none') {
-        tabla.style.display = 'block';
-    }
-    init();
+    const agregarTarea = document.getElementById('agregar-tarea');
+    const editarTarea = document.getElementById('Editar-tarea');
+    
+    if (getComputedStyle(tabla).display === 'none') {
+            tabla.style.display = 'block';
+             agregarTarea.style.display = 'none';
+             editarTarea.style.display = 'none';
+            }
+    init();    
 });
 
 document.getElementById('add-task-btn').addEventListener('click', () => {
     const tabla = document.getElementById('task-table-container');
+    const agregarTarea = document.getElementById('agregar-tarea');
+    const editarTarea = document.getElementById('Editar-tarea');
+    editarTarea.style.display = 'none';
     tabla.style.display = 'none';
+    agregarTarea.style.display = 'block';
 });
 
 document.getElementById('submit-task-btn').addEventListener('click', async (e) => {
     e.preventDefault();
     const Title = document.getElementById('title').value;
     const optionsSpan = document.getElementById('task-options'); 
+    const tabla = document.getElementById('task-table-container');
+    const agregarTarea = document.getElementById('agregar-tarea');
+    const editarTarea = document.getElementById('Editar-tarea');
+
     if (!Title) {
         alert("Asigne una tarea.");
         return;
@@ -62,6 +76,12 @@ document.getElementById('submit-task-btn').addEventListener('click', async (e) =
             alert("Tarea agregada.");
             optionsSpan.innerText = "Tarea agregada.";
             document.getElementById('title').value = ''; 
+
+            if (getComputedStyle(tabla).display === 'none') {
+            tabla.style.display = 'block';
+             agregarTarea.style.display = 'none';
+             editarTarea.style.display = 'none';
+            }
             init();
         } else {
             const errorText = await response.text(); 
@@ -125,6 +145,9 @@ document.getElementById('search-task-btn').addEventListener('click', async () =>
 document.getElementById('update-task-btn').addEventListener('click', async () => {
     const selectedSpan = document.getElementById('task-selected');
     const optionsSpan = document.getElementById('task-options');
+    const tabla = document.getElementById('task-table-container');
+    const agregarTarea = document.getElementById('agregar-tarea');
+    const editarTarea = document.getElementById('Editar-tarea');
 
 
     if (!selectedTask) {
@@ -147,12 +170,15 @@ document.getElementById('update-task-btn').addEventListener('click', async () =>
      
         if (response.ok || response.status === 204) {
             alert("Tarea actualizada.");
-            
-      
+
             if (optionsSpan) optionsSpan.innerText = "";
             if (selectedSpan) selectedSpan.innerHTML = "";
-            
             selectedTask = null;
+            if (getComputedStyle(tabla).display === 'none') {
+            tabla.style.display = 'block';
+             agregarTarea.style.display = 'none';
+             editarTarea.style.display = 'none';
+            }
             init();
         } else {
             const errorText = await response.text();
@@ -169,6 +195,10 @@ document.getElementById('update-task-btn').addEventListener('click', async () =>
 document.getElementById('delete-task-btn').addEventListener('click', async () => {
     const selectedSpan = document.getElementById('task-selected');
     const optionsSpan = document.getElementById('task-options');
+    const tabla = document.getElementById('task-table-container');
+    const agregarTarea = document.getElementById('agregar-tarea');
+    const editarTarea = document.getElementById('Editar-tarea');
+
 
     if (!selectedTask) {
         alert("Selecciona una tarea primero.");
@@ -187,11 +217,15 @@ document.getElementById('delete-task-btn').addEventListener('click', async () =>
         if (response.ok || response.status === 204) {
             alert("Tarea eliminada.");
             
-    
             if (optionsSpan) optionsSpan.innerText = "";
             if (selectedSpan) selectedSpan.innerHTML = "";
             
             selectedTask = null;
+             if (getComputedStyle(tabla).display === 'none') {
+            tabla.style.display = 'block';
+             agregarTarea.style.display = 'none';
+             editarTarea.style.display = 'none';
+            }
             init();
         } else {
             const errorText = await response.text();
@@ -239,4 +273,21 @@ document.getElementById('search-task-by-date-btn').addEventListener('click', asy
         console.error(error);
         optionsSpan.innerText = "Error al buscar";
     }
+});
+
+
+document.getElementById('edit-task-btn').addEventListener('click', () => {
+    const tabla = document.getElementById('task-table-container');
+    const editarTarea = document.getElementById('Editar-tarea');
+    const agregarTarea = document.getElementById('agregar-tarea');
+    tabla.style.display = 'none';
+    editarTarea.style.display = 'block';
+    agregarTarea.style.display = 'none';
+
+});
+
+document.getElementById("clear-date-filter-btn").addEventListener('click', () => {
+    const optionsSpan_date = document.getElementById('task-options-date');
+    optionsSpan_date.innerText = "";
+    document.getElementById('keyword-date').value = '';
 });

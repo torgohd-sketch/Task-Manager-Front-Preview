@@ -1,6 +1,484 @@
+/* Reset y variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+:root {
+    --primary-color: #4a90e2;
+    --primary-dark: #357abd;
+    --secondary-color: #50c878;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --background: #f5f7fa;
+    --surface: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --border-color: #dfe6e9;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 2rem;
+    color: var(--text-primary);
+}
+
+h1 {
+    color: var(--surface);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: -0.5px;
+}
+
+h2 {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Contenedor principal */
+body > * {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Botones principales */
+body > button {
+    background: var(--surface);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 0.75rem 1.5rem;
+    margin: 0.5rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+body > button:hover {
+    background: var(--primary-color);
+    color: var(--surface);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+body > button:active {
+    transform: translateY(0);
+}
+
+#load-tasks-btn {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+#load-tasks-btn:hover {
+    background: var(--primary-color);
+}
+
+#add-task-btn {
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+#add-task-btn:hover {
+    background: var(--secondary-color);
+}
+
+#edit-task-btn {
+    border-color: var(--warning-color);
+    color: var(--warning-color);
+}
+
+#edit-task-btn:hover {
+    background: var(--warning-color);
+}
+
+/* Tabla de tareas */
+#task-table-container {
+    display: none;
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    margin-top: 2rem;
+    animation: fadeIn 0.5s ease;
+}
 
 .tabla {
-
-    display: block;
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
 }
+
+.tabla thead {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: var(--surface);
+}
+
+.tabla th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+.tabla td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.tabla tbody tr {
+    transition: var(--transition);
+}
+
+.tabla tbody tr:hover {
+    background: #f8f9fa;
+    transform: scale(1.01);
+}
+
+.tabla tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Formulario agregar tarea */
+.agregar-tarea {
+    display: none;
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    margin-top: 2rem;
+    animation: fadeIn 0.5s ease;
+}
+
+#add-task-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+#add-task-form input[type="text"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+#add-task-form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+#submit-task-btn {
+    background: var(--secondary-color);
+    color: var(--surface);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    margin-top: 1rem;
+}
+
+#submit-task-btn:hover {
+    background: #45b369;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Sección editar tarea */
+.Editar-tarea {
+    display: none;
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    margin-top: 2rem;
+    animation: fadeIn 0.5s ease;
+}
+
+.Editar-tarea input[type="text"] {
+    width: calc(100% - 120px);
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    transition: var(--transition);
+}
+
+.Editar-tarea input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+#search-task-btn {
+    background: var(--primary-color);
+    color: var(--surface);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+#search-task-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+#task-options {
+    display: block;
+    margin-top: 1rem;
+    min-height: 2rem;
+}
+
+.task-option {
+    background: #f8f9fa;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    border-left: 4px solid var(--primary-color);
+}
+
+.task-option:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+    box-shadow: var(--shadow-sm);
+}
+
+#task-selected {
+    display: block;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin: 1rem 0;
+    min-height: 3rem;
+    border-left: 4px solid var(--secondary-color);
+}
+
+#task-selected strong {
+    color: var(--primary-color);
+}
+
+#update-task-btn {
+    background: var(--warning-color);
+    color: var(--surface);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    margin-right: 0.5rem;
+}
+
+#update-task-btn:hover {
+    background: #e67e22;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+#delete-task-btn {
+    background: var(--danger-color);
+    color: var(--surface);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+#delete-task-btn:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Buscar por fecha */
+.buscar-tarea-por-fecha {
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    margin-top: 2rem;
+}
+
+.buscar-tarea-por-fecha input[type="text"] {
+    width: calc(100% - 120px);
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    transition: var(--transition);
+}
+
+.buscar-tarea-por-fecha input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+#search-task-by-date-btn {
+    background: var(--primary-color);
+    color: var(--surface);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+#search-task-by-date-btn:hover{
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+#clear-date-filter-btn {
+    background: var(--primary-color);
+    color: var(--surface);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+#clear-date-filter-btn:hover{
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+#task-options-date {
+    display: block;
+    margin-top: 1rem;
+    min-height: 2rem;
+}
+
+/* Separador */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--border-color), transparent);
+    margin: 2rem 0;
+}
+
+/* Párrafos de resultado */
+p {
+    color: var(--text-secondary);
+    margin: 1rem 0;
+    font-weight: 500;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    body > button {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+
+    .Editar-tarea input[type="text"],
+    .buscar-tarea-por-fecha input[type="text"] {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    #search-task-btn,
+    #search-task-by-date-btn {
+        width: 100%;
+    }
+
+    .tabla {
+        font-size: 0.9rem;
+    }
+
+    .tabla th,
+    .tabla td {
+        padding: 0.75rem 0.5rem;
+    }
+
+    #update-task-btn,
+    #delete-task-btn {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+}
+
+#keyword-date {
+    padding: 0.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+

@@ -6,12 +6,13 @@
     <title>Tareas</title>
     <link rel="stylesheet" href="Style.css">
 </head>
-<body>
+<body >
     <h1>Lista de tareas</h1>
 
     <button id="load-tasks-btn">Cargar Tareas</button>
     <button id="add-task-btn">Agregar Tarea</button>
-
+    <button id="edit-task-btn">Editar Tarea</button>
+   
     <div id="task-table-container">
     <table class="tabla" border="1">
         <thead>
@@ -25,7 +26,7 @@
     </table>
 </div>
 
-     <div class = "agregar-tarea">
+     <div class = "agregar-tarea" id = "agregar-tarea">
         <h2>Agregar Nueva Tarea</h2>
         <form id="add-task-form">
             <label for="title">Título:</label>
@@ -36,11 +37,10 @@
      </div>
 
 
-     <div class = "Buscar-tarea"> 
+     <div class = "Editar-tarea" id = "Editar-tarea"> 
 
         
     <h2>Buscar tarea</h2>
-       <div class="buscar-tarea">
     <input type="text" id="keyword" placeholder="Buscar tarea">
     <button id="search-task-btn">Buscar</button>
 
@@ -51,14 +51,17 @@
     <p>Tarea seleccionada:</p>
     <span id="task-selected">—</span>
 
-        <button type="submit" id="update-task-btn">Actualizar Tarea</button> <button type="submit" id="delete-task-btn">Eliminar Tarea</button>
-
+    <button type="submit" id="update-task-btn">Actualizar Tarea</button> <button type="submit" id="delete-task-btn">Eliminar Tarea</button>
+</div>
     
-        <hr>
-<h2>Buscar tarea por fecha</h2>
-       <div class="buscar-tarea-por-fecha">
-    <input type="text" id="keyword-date" placeholder="Buscar tarea">
+
+
+     <hr>
+    <div class="buscar-tarea-por-fecha">
+     <h2>Buscar tarea por fecha</h2>
+    <input type="date" id="keyword-date" placeholder="Buscar tarea">
     <button id="search-task-by-date-btn">Buscar</button>
+    <button id="clear-date-filter-btn">Limpiar filtro</button>
 
     <p>Resultado:  <span id="task-options-date"></span></p>
 
